@@ -9,8 +9,6 @@ def data():
 
 	return data
 
-print(data())
-
 # import all functions from the tkinter
 import tkinter as tk
 from tkinter.font import Font

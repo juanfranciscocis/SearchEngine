@@ -1,6 +1,20 @@
+
+def data():
+	f = open('huge_txt_example.txt', 'r')
+	data = f.read()
+
+	# data to lowercase
+	data = data.lower()
+
+	return data
+
+print(data())
+
 # import all functions from the tkinter
 import tkinter as tk
 from tkinter.font import Font
+
+
 
 # create a Pad class
 class Pad(tk.Frame):
@@ -22,9 +36,11 @@ class Pad(tk.Frame):
 								command=self.clear)
 		self.clear_btn.pack(side="left")
 
+
+
 		# adding the text
 		self.text = tk.Text(self)
-		self.text.insert("end", "Pandemic has resulted in economic slowdown worldwide")
+		self.text.insert("end", data())
 		self.text.focus()
 		self.text.pack(fill="both", expand=True)
 
@@ -61,3 +77,10 @@ if __name__ == "__main__":
 
 	# function calling
 	demo()
+
+
+
+
+
+
+

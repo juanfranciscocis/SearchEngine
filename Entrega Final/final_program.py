@@ -66,6 +66,7 @@ def demo():
 
 	# Create a GUI window
 	root = tk.Tk()
+	root.title("Text Founder")
 
 	# place Pad object in the root window
 	Pad(root).pack(expand=1, fill="both")

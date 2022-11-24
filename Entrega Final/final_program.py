@@ -1,5 +1,6 @@
-
+#Loading the data from the txt file
 def data():
+
 	f = open('huge_txt_example.txt', 'r')
 	data = f.read()
 
@@ -45,7 +46,7 @@ class Pad(tk.Frame):
 		self.text.pack(fill="both", expand=True)
 
 		#configuring a tag called start
-		self.text.tag_configure("start", background="black", foreground="red")
+		self.text.tag_configure("start", background="yellow", foreground="black")
 
 	# method to highlight the selected text
 	def highlight_text(self):

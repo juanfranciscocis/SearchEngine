@@ -77,6 +77,10 @@ class Pad(tk.Frame):
 								command=self.highlight_text)
 		self.search_btn.pack(side="left")
 
+		#show the occurrences of the word
+		self.label = tk.Label(self.toolbar, text= "")
+		self.label.pack(side="right")
+
 
 
 
@@ -102,12 +106,16 @@ class Pad(tk.Frame):
 		wordToSearch = self.search_txt.get("1.0", "end-1c")
 		wordToSearchLen = len(wordToSearch)
 
-		# search for the text in the text widget
-		founded = boyer_moore_search(data(), str(wordToSearch))
+		# get the text from the text widget
+		text = self.text.get("1.0", "end-1c")
 
-		#show the occurrences of the word
-		self.label = tk.Label(self.toolbar, text= str(len(founded)) + " ocurrences found")
-		self.label.pack(side="right")
+		# search for the text in the text widget
+		founded = boyer_moore_search(text, str(wordToSearch).lower())
+
+		# show the occurrences of the word
+		self.label.config(text= str(len(founded)) + " occurrences found")
+
+
 
 		# if found, highlight the text
 		if founded:

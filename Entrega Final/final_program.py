@@ -10,6 +10,17 @@ def data():
 	return data
 
 
+def linearSearch(text, wordFind):
+    positions = []
+    for i in range(len(text)):
+        if text[i:i+len(wordFind)] == wordFind:
+            positions.append(i)
+
+    return positions
+
+
+
+
 
 # BOYER MOORE ALGORITHM
 NO_OF_CHARS = 256
@@ -54,12 +65,15 @@ from tkinter.font import Font
 
 
 
+
 # create a Pad class
 class Pad(tk.Frame):
 
 	# constructor to add buttons and text to the window
 	def __init__(self, parent, *args, **kwargs):
 		tk.Frame.__init__(self, parent, *args, **kwargs)
+
+		self.chosenAlgo = ''
 
 		self.toolbar = tk.Frame(self, bg="#eee")
 		self.toolbar.pack(side="top", fill="x")
@@ -72,16 +86,34 @@ class Pad(tk.Frame):
 		self.search_txt = tk.Text(self.toolbar, height=1, width=30)
 		self.search_txt.pack(side="left")
 
-		#this will add Clear button in the window
+		#this will add SEARCH button in the window
 		self.search_btn = tk.Button(self.toolbar, text="Search",
 								command=self.highlight_text)
 		self.search_btn.pack(side="left")
 
+		#this will add SEARCH button in the window
+		self.boyer_Moore_btn = tk.Button(self.toolbar, text="Boyer-Moore",
+								command=self.boyer_moore_choseen)
+		self.boyer_Moore_btn.pack(side="left")
+
+		#this will add SEARCH button in the window
+		self.linear_Search_btn = tk.Button(self.toolbar, text="Linear-Search",
+								command=self.linear_search_choseen)
+		self.linear_Search_btn.pack(side="left")
+
+		#this will add SEARCH button in the window
+		self.randall_btn = tk.Button(self.toolbar, text="Randall",
+								command=self.highlight_text)
+		self.randall_btn.pack(side="left")
+
+		#this will add SEARCH button in the window
+		self.juan_btn = tk.Button(self.toolbar, text="Juan Diego",
+								command=self.highlight_text)
+		self.juan_btn.pack(side="left")
+
 		#show the occurrences of the word
 		self.label = tk.Label(self.toolbar, text= "")
 		self.label.pack(side="right")
-
-
 
 
 
@@ -95,6 +127,12 @@ class Pad(tk.Frame):
 
 		#configuring a tag called start
 		self.text.tag_configure("start", background="yellow", foreground="black")
+
+	def boyer_moore_choseen(self):
+		self.chosenAlgo = 'Boyer_Moore'
+
+	def linear_search_choseen(self):
+		self.chosenAlgo ='Linear_Search'
 
 	# method to highlight the selected text
 	def highlight_text(self):
@@ -110,12 +148,17 @@ class Pad(tk.Frame):
 		text = self.text.get("1.0", "end-1c")
 
 		# search for the text in the text widget
-		founded = boyer_moore_search(text, str(wordToSearch).lower())
+
+		if(self.chosenAlgo == "Boyer_Moore"):
+			founded = boyer_moore_search(text, str(wordToSearch).lower())
+
+		elif(self.chosenAlgo == "Linear_Search"):
+			founded = linearSearch(text, str(wordToSearch).lower())
+
+
 
 		# show the occurrences of the word
 		self.label.config(text= str(len(founded)) + " occurrences found")
-
-
 
 		# if found, highlight the text
 		if founded:
@@ -123,6 +166,8 @@ class Pad(tk.Frame):
 				self.text.tag_add("start", "1.0 + {} chars".format(i), "1.0 + {} chars".format(i + wordToSearchLen))
 		else:
 			print("Pattern not found")
+
+
 
 	# method to clear all contents from text widget.
 	def clear(self):

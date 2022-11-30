@@ -1,3 +1,15 @@
+# timer function
+import time
+def timer_func(func):
+    # This function shows the execution time of
+    # the function object passed
+    def wrap_func(*args, **kwargs):
+        t1 = time.time()*10**12
+        result = func(*args, **kwargs)
+        t2 = time.time()*10**12
+        return result , t2-t1
+    return wrap_func
+
 #Loading the data from the txt file
 def data():
 
@@ -9,7 +21,7 @@ def data():
 
 	return data
 
-
+@timer_func
 def linearSearch(text, wordFind):
     positions = []
     for i in range(len(text)):
@@ -33,6 +45,7 @@ def badCharHeuristic(string, size):
 
 	return badChar
 
+@timer_func
 def boyer_moore_search(txt, pat):
 
 	patternFound = []
@@ -115,6 +128,12 @@ class Pad(tk.Frame):
 		self.label = tk.Label(self.toolbar, text= "")
 		self.label.pack(side="right")
 
+		self.footbar = tk.Frame(self, bg="#eee")
+		self.footbar.pack(side="bottom", fill="x")
+
+		self.timeLabel = tk.Label(self.footbar, text= "")
+		self.timeLabel.pack(side="right")
+
 
 
 
@@ -148,21 +167,28 @@ class Pad(tk.Frame):
 		text = self.text.get("1.0", "end-1c")
 
 		# search for the text in the text widget
+		founded = []
 
 		if(self.chosenAlgo == "Boyer_Moore"):
 			founded = boyer_moore_search(text, str(wordToSearch).lower())
 
+
 		elif(self.chosenAlgo == "Linear_Search"):
 			founded = linearSearch(text, str(wordToSearch).lower())
+
+		foundedIndex = founded[0]
+		time = founded[1]
 
 
 
 		# show the occurrences of the word
-		self.label.config(text= str(len(founded)) + " occurrences found")
+		self.label.config(text= str(len(foundedIndex)) + " occurrences found")
+		# show time of the algorithm took to find the word
+		self.timeLabel.config(text= str(time) + " seconds")
 
 		# if found, highlight the text
-		if founded:
-			for i in founded:
+		if foundedIndex:
+			for i in foundedIndex:
 				self.text.tag_add("start", "1.0 + {} chars".format(i), "1.0 + {} chars".format(i + wordToSearchLen))
 		else:
 			print("Pattern not found")

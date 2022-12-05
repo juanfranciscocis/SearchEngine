@@ -88,6 +88,32 @@ class Pad(tk.Frame):
 
 		self.chosenAlgo = ''
 
+		self.algobar = tk.Frame(self, bg="#eee")
+		self.algobar.pack(side="top", fill="x")
+
+		self.label = tk.Label(self.algobar, text="Pick A Algorithm:")
+		self.label.pack(side="left")
+
+		# this will add SEARCH button in the window
+		self.boyer_Moore_btn = tk.Button(self.algobar, text="Boyer-Moore",
+										 command=self.boyer_moore_choseen)
+		self.boyer_Moore_btn.pack(side="left")
+
+		# this will add SEARCH button in the window
+		self.linear_Search_btn = tk.Button(self.algobar, text="Linear-Search",
+										   command=self.linear_search_choseen)
+		self.linear_Search_btn.pack(side="left")
+
+		# this will add SEARCH button in the window
+		self.randall_btn = tk.Button(self.algobar, text="Randall",
+									 command=self.highlight_text)
+		self.randall_btn.pack(side="left")
+
+		# this will add SEARCH button in the window
+		self.juan_btn = tk.Button(self.algobar, text="Juan Diego",
+								  command=self.highlight_text)
+		self.juan_btn.pack(side="left")
+
 		self.toolbar = tk.Frame(self, bg="#eee")
 		self.toolbar.pack(side="top", fill="x")
 
@@ -104,35 +130,16 @@ class Pad(tk.Frame):
 								command=self.highlight_text)
 		self.search_btn.pack(side="left")
 
-		#this will add SEARCH button in the window
-		self.boyer_Moore_btn = tk.Button(self.toolbar, text="Boyer-Moore",
-								command=self.boyer_moore_choseen)
-		self.boyer_Moore_btn.pack(side="left")
-
-		#this will add SEARCH button in the window
-		self.linear_Search_btn = tk.Button(self.toolbar, text="Linear-Search",
-								command=self.linear_search_choseen)
-		self.linear_Search_btn.pack(side="left")
-
-		#this will add SEARCH button in the window
-		self.randall_btn = tk.Button(self.toolbar, text="Randall",
-								command=self.highlight_text)
-		self.randall_btn.pack(side="left")
-
-		#this will add SEARCH button in the window
-		self.juan_btn = tk.Button(self.toolbar, text="Juan Diego",
-								command=self.highlight_text)
-		self.juan_btn.pack(side="left")
-
-		#show the occurrences of the word
-		self.label = tk.Label(self.toolbar, text= "")
-		self.label.pack(side="right")
 
 		self.footbar = tk.Frame(self, bg="#eee")
 		self.footbar.pack(side="bottom", fill="x")
 
 		self.timeLabel = tk.Label(self.footbar, text= "")
 		self.timeLabel.pack(side="right")
+
+		#show the occurrences of the word
+		self.label = tk.Label(self.footbar, text= "")
+		self.label.pack(side="left")
 
 
 

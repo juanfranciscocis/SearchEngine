@@ -20,4 +20,4 @@ Para esta idea de proyecto se utilizarán los siguientes temas:
 - Boyer-Moore Search
 - KMP
 - Rabin Karp Algorithm
-Decorador de runtime para medir la eficiencia de cada algoritmo (runtime y uso de memoria)
+- Decorador de runtime para medir la eficiencia de cada algoritmo (runtime y uso de memoria)

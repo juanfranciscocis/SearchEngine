@@ -16,8 +16,8 @@ Para nuestro proyecto la idea sería implementar la función command F o control
 
 ## Temas que aplican a estructuras de datos y algoritmos: 
 Para esta idea de proyecto se utilizarán los siguientes temas:
-- Linear Search: este algoritmo de busqueda fue enseñado en clase y es un algoritmo de búsqueda de fuerza bruta, lo que utilizaríamos como base para comparar con otros algoritmos. 
+- Linear Search: este algoritmo de busqueda fue enseñado en clase y es un algoritmo de búsqueda de fuerza bruta, lo que utilizaríamos como base para comparar con otros algoritmos.
 - Boyer-Moore Search
-- Fibonacci Search
-- Shift-Or  Search
-- Decorador de runtime para medir la eficiencia de cada algoritmo (runtime y uso de memoria) 
+- KMP
+- Rabin Karp Algorithm
+Decorador de runtime para medir la eficiencia de cada algoritmo (runtime y uso de memoria)

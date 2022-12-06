@@ -1,7 +1,30 @@
+import time
+def timer_func(func):
+    # This function shows the execution time of
+    # the function object passed
+    def wrap_func(*args, **kwargs):
+        t1 = time.time()*10**12
+        result = func(*args, **kwargs)
+        t2 = time.time()*10**12
+        return result , t2-t1
+    return wrap_func
+
+
+with open('huge_txt_example.txt', 'r') as file:
+    document = file.read()
+#data to lowercase
+document = document.lower()
+
+
+
+
+wordSearchList = ['dui','aliquam','habitant','neque','nunc','commodo','libero','nulla','sapien','suscipit','viverra','mauris','nibh','nisi','nisl','nunc','odio','orci','ornare','pellentesque','pharetra','placerat','porta','porttitor','posuere','potenti','praesent','pretium','proin','pulvinar','purus','quam','quis','quisque','rhoncus','risus','rutrum','sagittis','sapien','scelerisque','sed','sem','semper','senectus','sit','sociis','sociosqu','sodales','sollicitudin','suscipit','suspendisse','taciti','tellus','tempor','tempus','tincidunt','torquent','tortor','tristique','turpis','ullamcorper','ultrices','ultricies','urna','ut','varius','vehicula','vel','velit','venenatis','vestibulum','vitae','vivamus','viverra','volutpat','vulputate']
+
+@timer_func
 def KMPSearch(search, txt):
-	patternFound = []
 	M = len(search)
 	j = 0  # index for search
+	index = []
 
 
 	N = len(txt)
@@ -19,8 +42,8 @@ def KMPSearch(search, txt):
 			j += 1
 
 		if j == M:
-			print("Found pattern at " + str(i-j))
-			patternFound.append(i-j)
+			index.append(i - j)
+			# print("Found pattern at " + str(i-j))
 			j = suffix[j-1]
 
 		# mismatch after j matches
@@ -29,8 +52,7 @@ def KMPSearch(search, txt):
 				j = suffix[j-1]
 			else:
 				i += 1
-
-	return patternFound
+	print("Word found at: ",index)
 
 
 def SuffixArray(search, M, suffix):
@@ -51,10 +73,16 @@ def SuffixArray(search, M, suffix):
 				i += 1
 
 
-txt = "Hola com estas co o como"
-search = "como"
-a = KMPSearch(search, txt)
-print(len(a))
+runtimeSearch = []
+for i in wordSearchList:
+	search = KMPSearch(i,document)
+	runtimeSearch.append(search[1])
+
+print(runtimeSearch)
+
+
+
+
 
 
 

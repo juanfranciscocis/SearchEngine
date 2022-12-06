@@ -10,6 +10,97 @@ def timer_func(func):
         return result , t2-t1
     return wrap_func
 
+@timer_func
+def kmp_search(txt,search):
+	patternFound = []
+	M = len(search)
+	j = 0  # index for search
+
+
+	N = len(txt)
+	i = 0  # index for txt
+
+	suffix = [0]*M
+
+	#Creates the comparison array
+	SuffixArray(search, M, suffix)
+
+
+	while (N - i) >= (M - j):
+		if search[j] == txt[i]:
+			i += 1
+			j += 1
+
+		if j == M:
+			patternFound.append(i-j)
+			j = suffix[j-1]
+
+		# mismatch after j matches
+		elif i < N and search[j] != txt[i]:
+			if j != 0:
+				j = suffix[j-1]
+			else:
+				i += 1
+
+	return patternFound
+
+
+def SuffixArray(search, M, suffix):
+	len = 0
+	suffix[0] = 0
+	i = 1
+
+	while i < M:
+		if search[i] == search[len]:
+			len += 1
+			suffix[i] = len
+			i += 1
+		else:
+			if len != 0:
+				len = suffix[len - 1]
+			else:
+				suffix[i] = 0
+				i += 1
+
+
+
+d = 256
+
+@timer_func
+def rabin_karp_search(txt, palabra):
+	arr = []
+	M = len(palabra)
+	N = len(txt)
+	q = 101
+	hashPattern = 0
+	hashText = 0
+	h = 1
+	for i in range(M - 1):
+		h = (h * d) % q
+
+	for i in range(M):  # hash de palabra y primera window
+		hashPattern = (d * hashPattern + ord(palabra[i])) % q
+		hashText = (d * hashText + ord(txt[i])) % q
+
+	for i in range(N - M + 1):  # recorrer el texto
+		if hashPattern == hashText:  # si tienen el mismo hash
+			for j in range(M):  # comparacion caracter por caracter del substring en la window con la palabra
+				if txt[i + j] != palabra[j]:
+					break
+				else:
+					j += 1
+				if j == M:
+					arr.append(i)
+
+		if i < N - M:  # hash de la siguiente ventana
+			hashText = (d * (hashText - ord(txt[i]) * h) + ord(txt[i + M])) % q
+
+	return arr
+
+
+
+# print(array)
+
 #Loading the data from the txt file
 def data():
 
@@ -105,13 +196,13 @@ class Pad(tk.Frame):
 		self.linear_Search_btn.pack(side="left")
 
 		# this will add SEARCH button in the window
-		self.randall_btn = tk.Button(self.algobar, text="Randall",
-									 command=self.highlight_text)
+		self.randall_btn = tk.Button(self.algobar, text="KMP",
+									 command=self.kmp_chosen)
 		self.randall_btn.pack(side="left")
 
 		# this will add SEARCH button in the window
-		self.juan_btn = tk.Button(self.algobar, text="Juan Diego",
-								  command=self.highlight_text)
+		self.juan_btn = tk.Button(self.algobar, text="Rabin-Karp",
+								  command=self.rabin_karp_choseen)
 		self.juan_btn.pack(side="left")
 
 		self.toolbar = tk.Frame(self, bg="#eee")
@@ -160,6 +251,12 @@ class Pad(tk.Frame):
 	def linear_search_choseen(self):
 		self.chosenAlgo ='Linear_Search'
 
+	def rabin_karp_choseen(self):
+		self.chosenAlgo ='Rabin_Karp'
+
+	def kmp_chosen(self):
+		self.chosenAlgo ='KMP'
+
 	# method to highlight the selected text
 	def highlight_text(self):
 
@@ -182,6 +279,12 @@ class Pad(tk.Frame):
 
 		elif(self.chosenAlgo == "Linear_Search"):
 			founded = linearSearch(text, str(wordToSearch).lower())
+
+		elif(self.chosenAlgo == "Rabin_Karp"):
+			founded = rabin_karp_search(text, str(wordToSearch).lower())
+
+		elif(self.chosenAlgo == "KMP"):
+			founded = kmp_search(text, str(wordToSearch).lower())
 
 		foundedIndex = founded[0]
 		time = founded[1]

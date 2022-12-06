@@ -1,4 +1,5 @@
 def KMPSearch(search, txt):
+	patternFound = []
 	M = len(search)
 	j = 0  # index for search
 
@@ -19,6 +20,7 @@ def KMPSearch(search, txt):
 
 		if j == M:
 			print("Found pattern at " + str(i-j))
+			patternFound.append(i-j)
 			j = suffix[j-1]
 
 		# mismatch after j matches
@@ -27,6 +29,8 @@ def KMPSearch(search, txt):
 				j = suffix[j-1]
 			else:
 				i += 1
+
+	return patternFound
 
 
 def SuffixArray(search, M, suffix):
@@ -49,8 +53,8 @@ def SuffixArray(search, M, suffix):
 
 txt = "Hola com estas co o como"
 search = "como"
-KMPSearch(search, txt)
-
+a = KMPSearch(search, txt)
+print(len(a))
 
 
 

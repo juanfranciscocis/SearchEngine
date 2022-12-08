@@ -269,6 +269,7 @@ class Pad(tk.Frame):
 
 		# get the text from the text widget
 		text = self.text.get("1.0", "end-1c")
+		text = text.lower()
 
 		# search for the text in the text widget
 		founded = []

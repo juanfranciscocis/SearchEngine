@@ -295,7 +295,7 @@ class Pad(tk.Frame):
 		# show the occurrences of the word
 		self.label.config(text= str(len(foundedIndex)) + " occurrences found")
 		# show time of the algorithm took to find the word
-		self.timeLabel.config(text= str(time) + " miliseconds")
+		self.timeLabel.config(text= str(time) + " picoseconds")
 
 		# if found, highlight the text
 		if foundedIndex:

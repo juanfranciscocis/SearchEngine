@@ -236,7 +236,7 @@ En otras palabras el algoritmo de KMP no es un buen algoritmo de busquedas para 
 La cadena-algoritmo de búsqueda de Boyer-Moore es un eficiente algoritmo de búsqueda de caracteres. Fue desarrollado por Robert S. Boyer y J Strother Moore en 1977.  El algoritmo preprocesa la cadena que se busca (el patrón), pero no la cadena en la que se busca (el texto). Por lo tanto, es adecuado para aplicaciones en las que el patrón es mucho más corto que el texto o donde persiste en múltiples búsquedas. En general, el algoritmo se ejecuta más rápido a medida que aumenta la longitud del patrón. Las características clave del algoritmo son hacer coincidir la cola del patrón en lugar de la cabeza, y saltar a lo largo del texto en saltos de varios caracteres en lugar de buscar todos los caracteres del texto. Tal como se muestra en el siguiente gif:
 
 
-![SegmentLocal](boyerMoore.gif)
+![SegmentLocal](https://github.com/juanfranciscocis/Search_Engine/blob/2db297adaba0e14b5c116bb44ce87b5afe2c79fb/EntregaFinal/boyerMoore.gif)
 
 El algoritmo de Boyer-Moore busca apariciones de P en T realizando comparaciones explícitas de caracteres en diferentes alineaciones. El algoritmo comienza en la alineación k=n, Por lo que el inicio de P está alineado con el inicio de T . Los caracteres en P y T se comparan entonces comenzando en el índice n en P y K en T , se mueve hacia atrás. Las comparaciones continúan hasta que se alcanza el comienzo de P (lo que significa que hay una coincidencia) o se produce una falta de coincidencia en la que la alineación se desplaza hacia adelante (hacia la derecha) de acuerdo con el valor máximo permitido por una serie de reglas. Las comparaciones se realizan de nuevo en la nueva alineación y el proceso se repite hasta que la alineación se desplaza más allá del final de T
 
@@ -253,11 +253,11 @@ El patrón P se mueve más allá del carácter no coincidente.
 
 Caso A: Buscaremos la posición de la última aparición del carácter no coincidente en el patrón, y si el carácter no coincidente existe en el patrón, cambiaremos el patrón de manera que se alinee con el carácter no coincidente en el texto T. Como se muestra en la imagen.
 
-<img src="../EntregaFinal/boyerMoore2.png"/>
+![boyer](https://github.com/juanfranciscocis/Search_Engine/blob/2db297adaba0e14b5c116bb44ce87b5afe2c79fb/EntregaFinal/boyerMoore2.png)
 
 Caso 2: el patrón se mueve más allá del carácter que no coincide. Buscaremos la posición de la última aparición del carácter que no coincide en el patrón y, si el carácter no existe, cambiaremos el patrón más allá del carácter que no coincide. Como se muestra en la imagen.
 
-<img src="../EntregaFinal/boyerMoore3.png"/>
+![boyer2](https://github.com/juanfranciscocis/Search_Engine/blob/2db297adaba0e14b5c116bb44ce87b5afe2c79fb/EntregaFinal/boyerMoore3.png)
 
 La heurística de mal carácter puede tardar O(mn) tiempo en el peor de los casos. El peor caso ocurre cuando todos los caracteres del texto y el patrón son iguales. La Heurística de Carácter Malo puede tomar O(n/m) en el mejor de los casos. El mejor caso ocurre cuando todos los caracteres del texto y el patrón son diferentes.
 

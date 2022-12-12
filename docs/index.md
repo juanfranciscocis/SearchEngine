@@ -338,6 +338,13 @@ df
 df.plot(figsize=(20,10), title='Comparison between different search algorithms')
 ```
 
+### IMAGENES DE NUESTRO PROGRAMA FINAL
+Aquí se adjuntan las imagenes de nuestro programa el cual se encuentra en el repositorio de github. El mismo tiene una interfaz 
+muy sencilla y fácil de usar, en la cual se puede seleccionar el algoritmo de búsqueda que se desea utilizar, el texto que se desea buscar y el texto en el cual se desea buscar el patrón.
+
+<img src="./images/textFounder.png"/>
+
+
 ### CONCLUSIONES
 
 Para este proyecto lo que se decidió hacer fue investigar diferentes algoritmos de busqueda y compararlos entre si, el algoritmo base que utilizamos de comparación fue el de fuerza bruta llamado Linear Search, este algoritmo tiene una complejidad de O(n), lo que indica que es lineal. Este tipo de algoritmo lo que hace es buscar la palabra que se le indica a lo largo de todo el texto, por lo que tiene que escribirse la palabra exacta para que esta puede ser encontrada, por lo que muestra que no es tan eficiente. Una vez terminado la comparación de los diferentes algoritmos de búsqueda de patrones, podemos concluir que el algoritmo de búsqueda de patrones de Boyer-Moore es el más eficiente en términos de tiempo de ejecución, ya que es capaz de encontrar patrones en un texto en un tiempo de ejecución de O(n x m), siendo n el tamaño del texto y m el tamaño del patrón. Los otros algoritmos de busqueda como por ejemplo el algoritmo de Rabin Karp tiene una complejidad de O(n x m) y el algoritmo KMP tiene una complejidad de O(n + m), lo cual indica que tiene el misma tipo complejidad que el Boyer-Moore, es decir lineal, sin embargo, esto no quiere decir que sean igual de eficientes, debido a que Boyer-Moore va revisando en todo el texto que cada letra coincida con la palabra que se está buscando desde el final hasta el inicio y si no coincide continua buscando así por todo el texto. Por el otro lado el algoritmo Rabin Karp busca la comparación de valor de Hash de una subcadena y así a lo largo de todo el texto. Por último el algoritmo de KMP busca las palabras utilizando un sistema de patrones, buscando así los mismos patrones en el texto, demorandose más que el sistema de Boyer-Moore.
